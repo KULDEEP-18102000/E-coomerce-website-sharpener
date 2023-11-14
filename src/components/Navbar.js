@@ -2,12 +2,23 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Cart from '../assets/cart.png'
 
-function NavbarComponent() {
+function NavbarComponent(props) {
+    let TotalItems=0
+
+    const showCart=()=>{
+      props.openCartItems()
+      // console.log("opened")
+    }
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        
+        <button onClick={showCart}>
+        <img style={{width:'12px',height:'12px',marginRight:'2px'}} src={Cart}></img>
+        <span>{TotalItems}</span>
+        </button>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
