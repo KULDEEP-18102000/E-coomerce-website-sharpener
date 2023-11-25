@@ -3,9 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Cart from '../assets/cart.png'
+import { useContext } from 'react';
+import CartContext from '../store/cart-context';
 
 function NavbarComponent(props) {
-    let TotalItems=0
+
+    const ctx=useContext(CartContext)
 
     const showCart=()=>{
       props.openCartItems()
@@ -17,7 +20,7 @@ function NavbarComponent(props) {
       <Container>
         <button onClick={showCart}>
         <img style={{width:'12px',height:'12px',marginRight:'2px'}} src={Cart}></img>
-        <span>{TotalItems}</span>
+        <span>{ctx.cartState.items.length}</span>
         </button>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

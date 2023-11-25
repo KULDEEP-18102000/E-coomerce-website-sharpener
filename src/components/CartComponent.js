@@ -1,6 +1,7 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import CartContext from "../store/cart-context";
 
 
 function CartComponent(props){
@@ -26,19 +27,23 @@ function CartComponent(props){
         }
         ]
 
+        const ctx=useContext(CartContext)
+        console.log(ctx)
+
         const [cartItems,setCartItems]=useState(cartElements)
 
         const removeFromCart=(item)=>{
-            console.log("remove")
-            let new_elements=cartItems.filter((element)=>{
-                return element.title!=item.title
-            })
-            console.log(new_elements)
-            setCartItems(new_elements)
+            // console.log("remove")
+            // let new_elements=cartItems.filter((element)=>{
+            //     return element.title!=item.title
+            // })
+            // console.log(new_elements)
+            // setCartItems(new_elements)
+            ctx.removeItem(item)
         }
 
         const CartItems=<ul>
-            {cartItems.map((item)=>
+            {ctx.cartState.items.map((item)=>
             <div><li>{item.title}-{item.price}-{item.quantity}</li>
             <span>
             <button onClick={()=>{removeFromCart(item)}}>Remove</button>

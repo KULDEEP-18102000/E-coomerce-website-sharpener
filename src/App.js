@@ -8,6 +8,7 @@ import NavbarComponent from './components/Navbar';
 import HeadingLayout from './components/HeadingLayout';
 import Products from './components/Products';
 import CartComponent from './components/CartComponent';
+import CartProvider from './store/CartProvider';
 
 function App() {
 
@@ -25,13 +26,13 @@ function App() {
   }
 
   return (
-    <div>
+    <CartProvider>
       <CartComponent show={showCart}
         onHide={() => setShowCart(false)}></CartComponent>
       <NavbarComponent openCartItems={showCartItems}></NavbarComponent>
       <HeadingLayout></HeadingLayout>
       <Products></Products>
-    </div>
+    </CartProvider>
   );
 }
 
