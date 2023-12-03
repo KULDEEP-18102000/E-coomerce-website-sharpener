@@ -9,6 +9,29 @@ import HeadingLayout from './components/HeadingLayout';
 import Products from './components/Products';
 import CartComponent from './components/CartComponent';
 import CartProvider from './store/CartProvider';
+import { createBrowserRouter,RouterProvider,createRoutesFromElements,Route } from 'react-router-dom';
+import HomePage from './pages/Home';
+import ProductPage from './pages/Product';
+import AboutPage from './pages/About';
+import RootLayout from './pages/Root';
+
+// const routeDefinitions= createRoutesFromElements(
+//   <Route>
+//     <Route path='/' element={<HomePage/>}/>
+//     <Route path='/products' element={<ProductPage/>}/>
+//   </Route>
+// )
+
+const router= createBrowserRouter([
+  {path:'/',element:<RootLayout/>,children:[
+    {path:'/',element:<HomePage/>},
+    {path:'/products',element:<ProductPage/>},
+    {path:'/about',element:<AboutPage/>}
+  ]}
+  
+])
+
+// const router=createBrowserRouter(routeDefinitions)
 
 function App() {
 
@@ -26,12 +49,16 @@ function App() {
   }
 
   return (
+    // <CartProvider>
+    //   <CartComponent show={showCart}
+    //     onHide={() => setShowCart(false)}></CartComponent>
+    //   <NavbarComponent openCartItems={showCartItems}></NavbarComponent>
+    //   <HeadingLayout></HeadingLayout>
+    //   <Products></Products>
+    // </CartProvider>
+
     <CartProvider>
-      <CartComponent show={showCart}
-        onHide={() => setShowCart(false)}></CartComponent>
-      <NavbarComponent openCartItems={showCartItems}></NavbarComponent>
-      <HeadingLayout></HeadingLayout>
-      <Products></Products>
+    <RouterProvider router={router}/>
     </CartProvider>
   );
 }

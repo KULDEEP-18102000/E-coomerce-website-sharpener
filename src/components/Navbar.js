@@ -6,6 +6,8 @@ import Cart from '../assets/cart.png'
 import { useContext } from 'react';
 import CartContext from '../store/cart-context';
 
+import { Link } from 'react-router-dom';
+
 function NavbarComponent(props) {
 
     const ctx=useContext(CartContext)
@@ -25,13 +27,30 @@ function NavbarComponent(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">STORE</Nav.Link>
-            <Nav.Link href="#link">About</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/products">STORE</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+
+    // <header>
+    //   <nav>
+    //     <ul>
+    //       <li>
+    //         <Link to="/">Home</Link>
+    //       </li>
+    //       <li>
+    //         <Link to="/products">Products</Link>
+    //       </li>
+    //       <li>
+    //         <Link to="/about">About</Link>
+    //       </li>
+    //     </ul>
+    //   </nav>
+    // </header>
   );
 }
 
