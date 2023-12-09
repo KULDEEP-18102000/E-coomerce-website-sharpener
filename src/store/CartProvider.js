@@ -16,6 +16,7 @@ const CartReducer=(state,action)=>{
         // state.totalAmount=state.totalAmount+action.item.price
         // console.log(state)
         // return state
+        
         const updatedItems=state.items.concat(action.item)
         console.log(updatedItems)
         const updatedTotalAmount=state.totalAmount+action.item.price

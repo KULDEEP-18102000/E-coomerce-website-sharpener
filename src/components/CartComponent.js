@@ -42,16 +42,7 @@ function CartComponent(props){
             ctx.removeItem(item)
         }
 
-        const CartItems=<ul>
-            {ctx.cartState.items.map((item)=>
-            <div><li>{item.title}-{item.price}-{item.quantity}</li>
-            <span>
-            <button onClick={()=>{removeFromCart(item)}}>Remove</button>
-            </span>
-                        </div>
-            )}
-        </ul>
-
+        
     return(
 <div>
         
@@ -64,11 +55,30 @@ function CartComponent(props){
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Cart Items
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {CartItems}
+        {/* {CartItems} */}
+        <table className="table">
+        <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  {ctx.cartState.items.map((item)=>
+          <tr>
+            <td>{item.title}</td>
+            <td>{item.price}</td>
+            <td>1</td>
+          </tr>
+          )}
+  </tbody>
+          
+        </table>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
