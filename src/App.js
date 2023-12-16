@@ -9,11 +9,14 @@ import HeadingLayout from './components/HeadingLayout';
 import Products from './components/Products';
 import CartComponent from './components/CartComponent';
 import CartProvider from './store/CartProvider';
-import { createBrowserRouter,RouterProvider,createRoutesFromElements,Route } from 'react-router-dom';
+// import { createBrowserRouter,RouterProvider,createRoutesFromElements,Route } from 'react-router-dom';
 import HomePage from './pages/Home';
 import ProductPage from './pages/Product';
 import AboutPage from './pages/About';
+import ContactPage from './pages/Contact';
 import RootLayout from './pages/Root';
+
+import { Route } from 'react-router-dom';
 
 // const routeDefinitions= createRoutesFromElements(
 //   <Route>
@@ -22,14 +25,14 @@ import RootLayout from './pages/Root';
 //   </Route>
 // )
 
-const router= createBrowserRouter([
-  {path:'/',element:<RootLayout/>,children:[
-    {path:'/',element:<HomePage/>},
-    {path:'/products',element:<ProductPage/>},
-    {path:'/about',element:<AboutPage/>}
-  ]}
+// const router= createBrowserRouter([
+//   {path:'/',element:<RootLayout/>,children:[
+//     {path:'/',element:<HomePage/>},
+//     {path:'/products',element:<ProductPage/>},
+//     {path:'/about',element:<AboutPage/>}
+//   ]}
   
-])
+// ])
 
 // const router=createBrowserRouter(routeDefinitions)
 
@@ -49,6 +52,25 @@ function App() {
   }
 
   return (
+    <>
+    <CartProvider>
+    <CartComponent show={showCart}
+        onHide={() => setShowCart(false)}></CartComponent>
+      <NavbarComponent openCartItems={showCartItems}></NavbarComponent>
+    <Route exact path="/">
+      <HomePage/>
+    </Route>
+    <Route path="/products">
+      <ProductPage/>
+    </Route>
+    <Route path="/about">
+      <AboutPage/>
+    </Route>
+    <Route path="/contact">
+      <ContactPage/>
+    </Route>
+    </CartProvider>
+    </>
     // <CartProvider>
     //   <CartComponent show={showCart}
     //     onHide={() => setShowCart(false)}></CartComponent>
@@ -57,9 +79,9 @@ function App() {
     //   <Products></Products>
     // </CartProvider>
 
-    <CartProvider>
-    <RouterProvider router={router}/>
-    </CartProvider>
+    // <CartProvider>
+    // <RouterProvider router={router}/>
+    // </CartProvider>
   );
 }
 

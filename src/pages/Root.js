@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+// import { Outlet } from "react-router-dom"
 import { useState } from "react";
 // import NavbarComponent from './components/Navbar';
 // import HeadingLayout from './components/HeadingLayout';
@@ -33,7 +33,7 @@ function RootLayout(){
       <HeadingLayout></HeadingLayout>
       {/* <Products></Products> */}
     {/* </CartProvider> */}
-        <Outlet/>
+        {/* <Outlet/> */}
         </>
         
     )

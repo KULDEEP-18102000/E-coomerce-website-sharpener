@@ -59,7 +59,8 @@ function Products() {
         ]
     
         const addToCart=(item)=>{
-          // console.log(ctx.cartState.items)
+          console.log(item)
+          console.log(ctx)
           // console.log("ctx")
           let flag=false
           for (let index = 0; index < ctx.cartState.items.length; index++) {
@@ -70,8 +71,10 @@ function Products() {
           }
           console.log(flag)
           if(flag==true){
+            console.log("if")
             setOpen(true)
           }else{
+            console.log("else")
             ctx.addItem(item)
           }
           
