@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import * as React from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 
 const style = {
@@ -32,26 +33,31 @@ function Products() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const history=useHistory()
 
   const ctx=useContext(CartContext)
   // console.log(ctx)
     const productsArr = [
         {
+        id:1,
         title: 'Colors',
         price: 100,
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
         },
         {
+        id:2,
         title: 'Black and white Colors',
         price: 50,
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
         },
         {
+        id:3,
         title: 'Yellow and Black Colors',
         price: 70,
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
         },
         {
+        id:4,
         title: 'Blue Color',
         price: 100,
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
@@ -79,6 +85,10 @@ function Products() {
           }
           
         }
+
+        const redirectToProductDetails=(id)=>{
+          history.push(`/productDetail/${id}`)
+        }
         
   return (
     <div>
@@ -102,7 +112,7 @@ function Products() {
     {productsArr.map((item) => (
           // Using map to create <li> elements dynamically
           <Card className='m-3' style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={item.imageUrl} />
+      <Card.Img variant="top" src={item.imageUrl} onClick={()=>{redirectToProductDetails(item.id)}}/>
       <Card.Body>
         <Card.Title>{item.title}</Card.Title>
         <Card.Text>

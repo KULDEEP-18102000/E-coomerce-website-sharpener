@@ -14,6 +14,7 @@ import HomePage from './pages/Home';
 import ProductPage from './pages/Product';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
+import ProductDetail from './pages/ProductDetail';
 import RootLayout from './pages/Root';
 
 import { Route } from 'react-router-dom';
@@ -62,6 +63,9 @@ function App() {
     </Route>
     <Route path="/products">
       <ProductPage/>
+    </Route>
+    <Route path="/productDetail/:productId">
+      <ProductDetail/>
     </Route>
     <Route path="/about">
       <AboutPage/>
