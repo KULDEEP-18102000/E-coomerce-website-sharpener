@@ -14,6 +14,7 @@ import HomePage from './pages/Home';
 import ProductPage from './pages/Product';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
+import AuthPage from './pages/AuthPage';
 import ProductDetail from './pages/ProductDetail';
 import RootLayout from './pages/Root';
 
@@ -69,6 +70,9 @@ function App() {
     </Route>
     <Route path="/about">
       <AboutPage/>
+    </Route>
+    <Route path="/auth">
+      <AuthPage/>
     </Route>
     <Route path="/contact">
       <ContactPage/>

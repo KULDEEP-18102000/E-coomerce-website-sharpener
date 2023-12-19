@@ -60,6 +60,9 @@ function NavbarComponent(props) {
           <NavLink className="nav-link" to="/about">About</NavLink>
         </li>  
         <li className="nav-item">
+          <NavLink className="nav-link" to="/auth">Login</NavLink>
+        </li>  
+        <li className="nav-item">
           <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
         </li>  
       </ul>
