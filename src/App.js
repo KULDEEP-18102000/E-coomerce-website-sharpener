@@ -17,8 +17,9 @@ import ContactPage from './pages/Contact';
 import AuthPage from './pages/AuthPage';
 import ProductDetail from './pages/ProductDetail';
 import RootLayout from './pages/Root';
-
-import { Route } from 'react-router-dom';
+import CartContext from './store/cart-context';
+import { useContext } from 'react';
+import { Route,Redirect } from 'react-router-dom';
 
 // const routeDefinitions= createRoutesFromElements(
 //   <Route>
@@ -44,6 +45,10 @@ function App() {
 
   const [showCart,setShowCart]=useState(false)
 
+  const ctx=useContext(CartContext)
+
+  console.log(ctx)
+
   const showCartItems=()=>{
     setShowCart(true)
     // console.log(showCart)
@@ -55,7 +60,7 @@ function App() {
 
   return (
     <>
-    <CartProvider>
+    
     <CartComponent show={showCart}
         onHide={() => setShowCart(false)}></CartComponent>
       <NavbarComponent openCartItems={showCartItems}></NavbarComponent>
@@ -63,7 +68,9 @@ function App() {
       <HomePage/>
     </Route>
     <Route path="/products">
-      <ProductPage/>
+      {ctx.isLoggedIn && <ProductPage/>}
+      {!ctx.isLoggedIn && <Redirect to='/auth'/>}
+      {/* <ProductPage/> */}
     </Route>
     <Route path="/productDetail/:productId">
       <ProductDetail/>
@@ -77,7 +84,7 @@ function App() {
     <Route path="/contact">
       <ContactPage/>
     </Route>
-    </CartProvider>
+    
     </>
     // <CartProvider>
     //   <CartComponent show={showCart}
