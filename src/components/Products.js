@@ -69,7 +69,7 @@ function Products() {
           console.log(ctx)
           // console.log("ctx")
           let flag=false
-          for (let index = 0; index < ctx.cartState.items.length; index++) {
+          for (let index = 0; index < ctx.cartState.items?.length; index++) {
             const element = ctx.cartState.items[index];
             if(element.title==item.title){
               flag=true
@@ -80,7 +80,7 @@ function Products() {
             console.log("if")
             setOpen(true)
           }else{
-            console.log("else")
+            console.log("else",item)
             ctx.addItem(item)
           }
           
@@ -118,7 +118,7 @@ function Products() {
         <Card.Text>
           {item.price}
         </Card.Text>
-        <Button variant="contained" onClick={()=>{addToCart(item)}}>Add to Cart</Button>
+        <Button variant="contained" onClick={()=>addToCart(item)}>Add to Cart</Button>
       </Card.Body>
     </Card>
         ))}

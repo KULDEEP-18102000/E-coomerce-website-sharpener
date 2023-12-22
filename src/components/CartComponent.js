@@ -2,6 +2,8 @@ import React,{useState,useContext} from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import CartContext from "../store/cart-context";
+import { useEffect } from "react";
+import axios from "axios";
 
 
 function CartComponent(props){
@@ -31,6 +33,8 @@ function CartComponent(props){
         console.log(ctx)
 
         const [cartItems,setCartItems]=useState(cartElements)
+
+        
 
         const removeFromCart=(item)=>{
             // console.log("remove")
@@ -69,7 +73,8 @@ function CartComponent(props){
     </tr>
   </thead>
   <tbody>
-  {ctx.cartState.items.map((item)=>
+    {console.log(cartItems)}
+  {ctx.cartState.items?.map((item)=>
           <tr>
             <td>{item.title}</td>
             <td>{item.price}</td>

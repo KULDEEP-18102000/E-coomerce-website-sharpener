@@ -1,5 +1,6 @@
-import { useReducer,useState } from "react";
+import { useReducer,useState,useEffect } from "react";
 import CartContext from "./cart-context";
+import axios from "axios";
 
 const defaultCartState={
     items:[],
@@ -12,10 +13,6 @@ const CartReducer=(state,action)=>{
         console.log("entered into fn")
         console.log(state)
         console.log(action)
-        // state.items.push(action.item)
-        // state.totalAmount=state.totalAmount+action.item.price
-        // console.log(state)
-        // return state
         
         const updatedItems=state.items.concat(action.item)
         console.log(updatedItems)
@@ -49,19 +46,37 @@ const CartReducer=(state,action)=>{
 const CartProvider=(props)=>{
 
     const [cartState,dispatchCartAction]=useReducer(CartReducer, defaultCartState)
+    console.log(cartState)
 
     const initialToken=localStorage.getItem('token')
+    const email=localStorage.getItem('email')
+    const endpoint='cart'+email.split('@')[0]+'mailcom'
+    console.log(endpoint)
     const [token,setToken]=useState(initialToken)
+
+    useEffect(()=>{
+        const fetch=async()=>{
+            const response=await axios.get(`https://crudcrud.com/api/a4331abc138e43e19bb8b1b18dcd5e96/${endpoint}`)
+            console.log(response)
+            for (let index = 0; index < response.data.length; index++) {
+                const element = response.data[index];
+                console.log(element)
+                dispatchCartAction({type:'add',item:element})
+            }
+          }
+          fetch()
+    },[])
 
     const isLoggedIn=!!token
 
     const loginHandler=(token)=>{
         // console.log("loginhandler")
+        
+        localStorage.setItem('token',token)
         setTimeout(()=>{
             console.log("settomeoutcalled")
             localStorage.clear('token')
         },300000)
-        localStorage.setItem('token',token)
         setToken(token)
     }
     
@@ -70,9 +85,13 @@ const CartProvider=(props)=>{
         setToken(null)
     }
 
-const addItem=(item)=>{
+const addItem=async(item)=>{
     console.log(item)
-    dispatchCartAction({type:'add',item:item})
+    const response=await axios.post(`https://crudcrud.com/api/a4331abc138e43e19bb8b1b18dcd5e96/${endpoint}`,item)
+       console.log(response)
+
+       
+     dispatchCartAction({type:'add',item:item})
 }
 
 const removeItem=(item)=>{

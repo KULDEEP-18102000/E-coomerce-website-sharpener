@@ -6,13 +6,15 @@ import Cart from '../assets/cart.png'
 import { useContext } from 'react';
 import CartContext from '../store/cart-context';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function NavbarComponent(props) {
 
     const ctx=useContext(CartContext)
     console.log(ctx)
+
+    
 
     const showCart=()=>{
       props.openCartItems()
@@ -46,7 +48,7 @@ function NavbarComponent(props) {
     </button>
     <button onClick={showCart}>
       <img style={{width:'12px',height:'12px',marginRight:'2px'}} src={Cart}></img>
-      <span>{ctx.cartState.items.length}</span>
+      <span>{ctx.cartState.items?.length}</span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">

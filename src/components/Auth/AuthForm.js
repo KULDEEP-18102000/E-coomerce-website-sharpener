@@ -74,7 +74,7 @@ const AuthForm = () => {
       setLoading(false)
 
       console.log(res.idToken)
-      // localStorage.setItem('token',res.idToken)
+      localStorage.setItem('email',user.email)
       ctx.loginHandler(res.idToken)
       history.push('/products')
     }
