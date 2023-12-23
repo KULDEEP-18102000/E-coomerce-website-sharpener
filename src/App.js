@@ -11,15 +11,17 @@ import CartComponent from './components/CartComponent';
 import CartProvider from './store/CartProvider';
 // import { createBrowserRouter,RouterProvider,createRoutesFromElements,Route } from 'react-router-dom';
 import HomePage from './pages/Home';
-import ProductPage from './pages/Product';
+// import ProductPage from './pages/Product';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
 import AuthPage from './pages/AuthPage';
-import ProductDetail from './pages/ProductDetail';
+// import ProductDetail from './pages/ProductDetail';
+
 import RootLayout from './pages/Root';
 import CartContext from './store/cart-context';
 import { useContext } from 'react';
 import { Route,Redirect } from 'react-router-dom';
+import { lazy,Suspense } from 'react';
 
 // const routeDefinitions= createRoutesFromElements(
 //   <Route>
@@ -38,6 +40,11 @@ import { Route,Redirect } from 'react-router-dom';
 // ])
 
 // const router=createBrowserRouter(routeDefinitions)
+
+const ProductDetailComponent=lazy(()=>import('./pages/ProductDetail'))
+const ProductPageComponent=lazy(()=>import('./pages/Product'))
+const AboutPageComponent=lazy(()=>import('./pages/About'))
+const ContactPageComponent=lazy(()=>import('./pages/Contact'))
 
 function App() {
 
@@ -68,22 +75,46 @@ function App() {
       <HomePage/>
     </Route>
     <Route path="/products">
-      {ctx.isLoggedIn && <ProductPage/>}
+      {ctx.isLoggedIn && 
+      // <ProductPage/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductPageComponent />
+      </Suspense>
+      }
       {!ctx.isLoggedIn && <Redirect to='/auth'/>}
       {/* <ProductPage/> */}
     </Route>
-    <Route path="/productDetail/:productId">
-      <ProductDetail/>
-    </Route>
+    
+    {/* <Route path="/productDetail/:productId"> */}
+      {/* <ProductDetail/> */}
+      {/* <Suspense fallback={<div>...Loading</div>}> */}
+        {/* <ProductDetailComponent {...props} /> */}
+      {/* </Suspense> */}
+    {/* </Route> */}
+    <Route
+            path="/productDetail/:productId"
+            render={(props) => (
+              <Suspense fallback={<div>Loading...</div>}>
+                <ProductDetailComponent {...props} />
+              </Suspense>
+            )}
+          />
     <Route path="/about">
-      <AboutPage/>
+      {/* <AboutPage/> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <AboutPageComponent />
+      </Suspense>
     </Route>
     <Route path="/auth">
       <AuthPage/>
     </Route>
     <Route path="/contact">
-      <ContactPage/>
+      {/* <ContactPage/> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <ContactPageComponent />
+      </Suspense>
     </Route>
+    
     
     </>
     // <CartProvider>

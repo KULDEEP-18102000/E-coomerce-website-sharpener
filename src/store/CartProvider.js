@@ -50,13 +50,17 @@ const CartProvider=(props)=>{
 
     const initialToken=localStorage.getItem('token')
     const email=localStorage.getItem('email')
-    const endpoint='cart'+email.split('@')[0]+'mailcom'
+    // const endpoint='cart'+email.split('@')[0]+'mailcom'
+    let endpoint;
+    if(email){
+        endpoint='cart'+email.split('@')[0]+'mailcom'
+    }
     console.log(endpoint)
     const [token,setToken]=useState(initialToken)
 
     useEffect(()=>{
         const fetch=async()=>{
-            const response=await axios.get(`https://crudcrud.com/api/a4331abc138e43e19bb8b1b18dcd5e96/${endpoint}`)
+            const response=await axios.get(`https://crudcrud.com/api/97c2c2749ebb4dd698f723951294a91d/${endpoint}`)
             console.log(response)
             for (let index = 0; index < response.data.length; index++) {
                 const element = response.data[index];
@@ -70,12 +74,13 @@ const CartProvider=(props)=>{
     const isLoggedIn=!!token
 
     const loginHandler=(token)=>{
-        // console.log("loginhandler")
+        console.log("loginhandler")
         
         localStorage.setItem('token',token)
         setTimeout(()=>{
             console.log("settomeoutcalled")
             localStorage.clear('token')
+            localStorage.clear('email')
         },300000)
         setToken(token)
     }
@@ -87,15 +92,21 @@ const CartProvider=(props)=>{
 
 const addItem=async(item)=>{
     console.log(item)
-    const response=await axios.post(`https://crudcrud.com/api/a4331abc138e43e19bb8b1b18dcd5e96/${endpoint}`,item)
+    const response=await axios.post(`https://crudcrud.com/api/97c2c2749ebb4dd698f723951294a91d/${endpoint}`,item)
        console.log(response)
 
        
-     dispatchCartAction({type:'add',item:item})
+     dispatchCartAction({type:'add',item:response.data})
 }
 
-const removeItem=(item)=>{
+const removeItem=async(item)=>{
+    console.log(item._id)
+    if(item._id!=undefined){
+    const response=await axios.delete(`https://crudcrud.com/api/97c2c2749ebb4dd698f723951294a91d/${endpoint}/${item._id}`)
+    console.log(response)
     dispatchCartAction({type:'remove',item:item})
+    }
+    
 }
 
 return(

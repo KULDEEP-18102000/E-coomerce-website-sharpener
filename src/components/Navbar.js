@@ -21,6 +21,10 @@ function NavbarComponent(props) {
       // console.log("opened")
     }
 
+    const logOut=()=>{
+      ctx.logOutHandler()
+    }
+
   return (
     // <Navbar expand="lg" classNameName="bg-body-tertiary">
     //   <Container>
@@ -46,10 +50,13 @@ function NavbarComponent(props) {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
+    {ctx.isLoggedIn && 
     <button onClick={showCart}>
-      <img style={{width:'12px',height:'12px',marginRight:'2px'}} src={Cart}></img>
-      <span>{ctx.cartState.items?.length}</span>
-    </button>
+    <img style={{width:'12px',height:'12px',marginRight:'2px'}} src={Cart}></img>
+    <span>{ctx.cartState.items?.length}</span>
+  </button>
+    }
+    
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
@@ -67,6 +74,11 @@ function NavbarComponent(props) {
         <li className="nav-item">
           <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
         </li>  
+        {ctx.isLoggedIn && (
+            <li>
+            <button onClick={logOut}>Logout</button>
+          </li>
+          )}
       </ul>
     </div>
   </div>

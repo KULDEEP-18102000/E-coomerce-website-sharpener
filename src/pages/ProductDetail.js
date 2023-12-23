@@ -13,6 +13,7 @@ function ProductDetail(){
         console.log(params.productId)
         for (let index = 0; index < productsArr.length; index++) {
             const element = productsArr[index];
+            console.log(element)
             if(element.id==params.productId){
                 setProduct(element)
             }
@@ -49,7 +50,7 @@ function ProductDetail(){
     return(
         <>
         <h1>Product Detail</h1>
-        <img src={product.imageUrl}/>
+        <img src={product && product.imageUrl}/>
         <p>{product && product.title}</p>
         </>
     )

@@ -70,6 +70,7 @@ function CartComponent(props){
       <th scope="col">Title</th>
       <th scope="col">Price</th>
       <th scope="col">Quantity</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -79,6 +80,7 @@ function CartComponent(props){
             <td>{item.title}</td>
             <td>{item.price}</td>
             <td>1</td>
+            <td><button onClick={()=>removeFromCart(item)}>Remove</button></td>
           </tr>
           )}
   </tbody>
